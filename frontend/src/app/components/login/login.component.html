@@ -1,0 +1,99 @@
+<!-- <h2 class="page-header">Login</h2>
+<form (submit)="onLoginSubmit()">
+  <div class="form-group">
+    <label>Username</label>
+    <input type="text" class="form-control" [(ngModel)]="username" name="username">
+  </div>
+  <div class="form-group">
+    <label>Password</label>
+    <input type="password" class="form-control" [(ngModel)]="password" name="password">
+  </div>
+  <input type="submit" class="btn btn-primary" value="Login">
+</form> -->
+
+<!-- <div id="preloader">
+  <div class="canvas">
+    <img src="assets/img/logo.png" alt="logo" class="loader-logo">
+    <div class="spinner"></div>
+  </div>
+</div> -->
+<!-- End Preloader -->
+<!-- Begin Container -->
+<div class="container-fluid no-padding h-100">
+  <div class="row flex-row h-100 bg-white">
+    <!-- Begin Left Content -->
+    <div class="col-xl-8 col-lg-6 col-md-5 no-padding">
+      <div class="elisyam-bg background-01">
+        <div class="elisyam-overlay overlay-01"></div>
+        <div class="authentication-col-content mx-auto">
+          <h1 class="gradient-text-01">
+            Welcome To Elisyam!
+          </h1>
+          <span class="description">
+            Let companies search for you! Upload your profile today!
+          </span>
+        </div>
+      </div>
+    </div>
+    <!-- End Left Content -->
+    <!-- Begin Right Content -->
+    <div class="col-xl-4 col-lg-6 col-md-7 my-auto no-padding">
+      <!-- Begin Form -->
+      <div class="authentication-form mx-auto">
+        <div class="logo-centered">
+          <a href="db-default.html">
+            <img src="assets/img/logo.png" alt="logo">
+          </a>
+        </div>
+        <h3>Sign In To Elisyam</h3>
+        <form (submit)="onLoginSubmit()">
+          <div class="group material-input">
+            <input type="text" [(ngModel)]="username" name="username">
+            <span class="highlight"></span>
+            <span class="bar"></span>
+            <label>User name</label>
+          </div>
+          <div class="group material-input">
+            <input type="password" [(ngModel)]="password" name="password">
+            <span class="highlight"></span>
+            <span class="bar"></span>
+            <label>Password</label>
+          </div>
+
+          <div class="row">
+            <div class="col text-right">
+              <a href="pages-forgot-password.html">Forgot Password ?</a>
+            </div>
+          </div>
+          <div class="sign-btn text-center">
+            <div class="btn-group">
+              <button type="submit" class="btn btn-secondary" value="Login">Log In</button>
+              <a class="btn btn-secondary dropdown-toggle d-flex align-items-center" data-toggle="dropdown"
+                aria-haspopup="true" aria-expanded="false">
+                <i class="la la-angle-down mr-0"></i>
+              </a>
+              <div class="dropdown-menu">
+                <a class="dropdown-item" href="#">As Employee</a>
+                <a class="dropdown-item" href="#">As Companies</a>
+                <a class="dropdown-item" href="#">As Administrator</a>
+              </div>
+            </div>
+          </div>
+          <div class="register">
+            Don't have an account?
+            <br>
+            <!-- <a href="pages-register.html">Create an account</a> -->
+            <a [routerLink]="['/register']">Create an account</a>
+            or
+            <a href="pages-register.html">Create an account with Google</a>
+          </div>
+        </form>
+        
+      </div>
+      <!-- End Form -->
+    </div>
+    <!-- End Right Content -->
+  </div>
+  <!-- End Row -->
+</div>
+

@@ -9,11 +9,19 @@ const { registerValiddation, loginValidation } = require('../validation');
 router.post('/register', async (req, res) => {
     //LETS VALIDATE THE DATA BEFORE WE A USER
     const { error } = registerValiddation(req.body);
-    if (error) return res.status(400).send(error.details[0].message);
+    // if (error) return res.status(400).send(error.details[0].message);
+    if (error) return res.json({
+        success: false,
+        msg: error.details[0].message
+    });
 
     //Checking if the user is already in the database
     const userNameExist = await User.findOne({ username: req.body.username });
-    if (userNameExist) return res.status(400).send('Username already exists');
+    // if (userNameExist) return res.status(400).send('Username already exists');
+    if (userNameExist) return res.json({
+        success: false,
+        msg: 'Username already exists'
+    });
 
     //Hash password
     const salt = await bcrypt.genSalt(10) ;
@@ -28,9 +36,17 @@ router.post('/register', async (req, res) => {
     });
     try {
         const savedUser = await user.save();
-        res.send(savedUser);
+        // res.send(savedUser);
+        res.json({
+            success: true,
+            user: savedUser
+        })
     } catch (err) {
-        res.status(400).send(err);
+        // res.status(400).send(err);
+        res.json({
+            success: false,
+            msg: err
+        })
     }
 });
 
@@ -54,14 +70,14 @@ router.post('/login', (req, res) => {
         if (!user) {
             res.json({
                 success: false,
-                message: 'Authentication failed. User not found'
+                msg: 'Authentication failed. User not found'
             });
         } else if (user) {
             var validPassword = user.comparePassword(req.body.password);
             if (!validPassword) {
                 res.json({ 
                     success: false,
-                    message: 'Authetication failed. Wrong password.'
+                    msg: 'Authetication failed. Wrong password.'
                 });
             } else {
                 const token = jwt.sign({
@@ -71,7 +87,15 @@ router.post('/login', (req, res) => {
                 }, process.env.TOKEN_SECRET, {
                     expiresIn: '24h'
                 });
-                res.header('auth-token', token).send(token);
+                // res.header('auth-token', token).send(token);
+                res.json({
+                    success: true,
+                    token: 'JWT '+token,
+                    user: {
+                        id: user._id,
+                        username: user.username
+                    }
+                });
             }
         }
     });

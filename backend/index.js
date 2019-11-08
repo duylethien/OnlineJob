@@ -15,6 +15,11 @@ mongoose.connect(process.env.DB_CONNECT, { useNewUrlParser: true, useUnifiedTopo
 mongoose.set('useCreateIndex', true);
 //   .connect('mongodb+srv://duylethien:123123123@cluster0-1b9kw.mongodb.net/duyy?retryWrites=true&w=majority', { useNewUrlParser: true, useUnifiedTopology: true })
 
+// app.use(function(req, res, next) {
+//     res.setHeader('Access-Control-Allow-Origin', '*');
+//     next();
+// });
+
 //Middleware
 app.use(express.json());
 //Route Middlewares
