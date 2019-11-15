@@ -7,27 +7,22 @@ require('../config/passport')(passport)
 const { registerValiddation, loginValidation } = require('../validation');
 
 router.post('/register', async (req, res) => {
-    //LETS VALIDATE THE DATA BEFORE WE A USER
     const { error } = registerValiddation(req.body);
-    // if (error) return res.status(400).send(error.details[0].message);
+
     if (error) return res.json({
         success: false,
         msg: error.details[0].message
     });
 
-    //Checking if the user is already in the database
     const userNameExist = await User.findOne({ username: req.body.username });
-    // if (userNameExist) return res.status(400).send('Username already exists');
     if (userNameExist) return res.json({
         success: false,
         msg: 'Username already exists'
     });
 
-    //Hash password
     const salt = await bcrypt.genSalt(10) ;
     const hashedPassword = await bcrypt.hash(req.body.password, salt);
 
-    //Create a new user
     const user = new User({ 
         name: req.body.name,
         username: req.body.username,
@@ -36,13 +31,11 @@ router.post('/register', async (req, res) => {
     });
     try {
         const savedUser = await user.save();
-        // res.send(savedUser);
         res.json({
             success: true,
             user: savedUser
         })
     } catch (err) {
-        // res.status(400).send(err);
         res.json({
             success: false,
             msg: err
@@ -50,17 +43,17 @@ router.post('/register', async (req, res) => {
     }
 });
 
-router.post('/loginn', async (req, res) => {
-    const { error } = loginValidation(req.body);
-    if (error) return res.status(400).send(error.details[0].message);
-        //Checking if the email exists
-        const user = await User.findOne({ username: req.body.username });
-        if (!user) return res.status(400).send('User not found');
-        //PASSWORD is correct
-        const validPass = await bcrypt.compare(req.body.password, user.password);
-        if(!validPass) return res.status(400).send('Invalid password')
-        res.send('Logged in!');
-});
+// router.post('/loginn', async (req, res) => {
+//     const { error } = loginValidation(req.body);
+//     if (error) return res.status(400).send(error.details[0].message);
+
+//         const user = await User.findOne({ username: req.body.username });
+//         if (!user) return res.status(400).send('User not found');
+        
+//         const validPass = await bcrypt.compare(req.body.password, user.password);
+//         if(!validPass) return res.status(400).send('Invalid password')
+//         res.send('Logged in!');
+// });
 
 router.post('/login', (req, res) => {
     User.findOne({ 
@@ -90,7 +83,8 @@ router.post('/login', (req, res) => {
                 // res.header('auth-token', token).send(token);
                 res.json({
                     success: true,
-                    token: 'JWT '+token,
+                    // token: 'JWT '+token,
+                    token: token,
                     user: {
                         id: user._id,
                         username: user.username

@@ -1,74 +1,73 @@
-<div id="preloader">
-    <div class="canvas">
-      <img src="assets/img/logo.png" alt="logo" class="loader-logo">
-      <div class="spinner"></div>
-    </div>
+<!-- <div id="preloader">
+  <div class="canvas">
+    <img src="assets/img/logo.png" alt="logo" class="loader-logo">
+    <div class="spinner"></div>
   </div>
-  <!-- End Preloader -->
-  <!-- Begin Container -->
-  <div class="container-fluid no-padding h-100">
-    <div class="row flex-row h-100 bg-white">
-      <!-- Begin Left Content -->
-      <div class="col-xl-8 col-lg-6 col-md-5 no-padding">
-        <div class="elisyam-bg background-05">
-          <div class="elisyam-overlay overlay-04"></div>
-          <div class="authentication-col-content mx-auto">
-            <h1 class="gradient-text-01">
-              Be Elisyam!
-            </h1>
-            <span class="description">
-              Let companies search for you! Upload your profile today!
-            </span>
-          </div>
+</div> -->
+<!-- End Preloader -->
+<!-- Begin Container -->
+<div class="container-fluid no-padding h-100">
+  <div class="row flex-row h-100 bg-white">
+    <!-- Begin Left Content -->
+    <div class="col-xl-8 col-lg-6 col-md-5 no-padding">
+      <div class="elisyam-bg background-05">
+        <div class="elisyam-overlay overlay-04"></div>
+        <div class="authentication-col-content mx-auto">
+          <h1 class="gradient-text-01">
+            Be Elisyam!
+          </h1>
+          <span class="description">
+            Let companies search for you! Upload your profile today!
+          </span>
         </div>
       </div>
-      <!-- End Left Content -->
-      <!-- Begin Right Content -->
-      <div class="col-xl-4 col-lg-6 col-md-7 my-auto no-padding">
-        <!-- Begin Form -->
-        <div class="authentication-form mx-auto">
-          <div class="logo-centered">
-            <a href="db-default.html">
-              <img src="assets/img/logo.png" alt="logo">
-            </a>
-          </div>
-          <h3>Create An Account</h3>
-          <form (submit)="onRegisterSubmit()">
-            <div class="group material-input">
-              <input type="text" [(ngModel)]="username" name="username">
-              <span class="highlight"></span>
-              <span class="bar"></span>
-              <label>User name</label>
-            </div>
-            <div class="group material-input">
-              <input type="password" [(ngModel)]="password" name="password">
-              <span class="highlight"></span>
-              <span class="bar"></span>
-              <label>Password</label>
-            </div>
-            <div class="group material-input">
-              <input type="password" [(ngModel)]="re_password" name="re_password">
-              <span class="highlight"></span>
-              <span class="bar"></span>
-              <label>Confirm Password</label>
-            </div>
-          <div class="sign-btn text-center">
-                <input type="submit" class="btn btn-primary" value="Create an account">
-            <!-- <a href="db-default.html" class="btn btn-lg btn-gradient-01">
-              Create an account
-            </a> -->
-          </div>
-        </form>
-          <div class="register">
-            Already have an account?
-            <br>
-            <a href="pages-login.html">Sign In</a>
-          </div>
-        </div>
-        <!-- End Form -->
-      </div>
-      <!-- End Right Content -->
     </div>
-    <!-- End Row -->
+    <!-- End Left Content -->
+    <!-- Begin Right Content -->
+    <div class="col-xl-4 col-lg-6 col-md-7 my-auto no-padding">
+      <!-- Begin Form -->
+      <div class="authentication-form mx-auto">
+        <div class="logo-centered">
+          <a href="db-default.html">
+            <img src="assets/img/logo.png" alt="logo">
+          </a>
+        </div>
+        <h3>Create An Account</h3>
+        <form (submit)="onRegisterSubmit()">
+          <div class="group material-input">
+            <input type="text" [(ngModel)]="username" name="username">
+            <span class="highlight"></span>
+            <span class="bar"></span>
+            <label>User name</label>
+          </div>
+          <div class="group material-input">
+            <input type="password" [(ngModel)]="password" name="password">
+            <span class="highlight"></span>
+            <span class="bar"></span>
+            <label>Password</label>
+          </div>
+          <div class="group material-input">
+            <input type="password" [(ngModel)]="re_password" name="re_password">
+            <span class="highlight"></span>
+            <span class="bar"></span>
+            <label>Confirm Password</label>
+          </div>
+        <div class="sign-btn text-center">
+              <input type="submit" class="btn btn-primary" value="Create an account">
+          <!-- <a href="db-default.html" class="btn btn-lg btn-gradient-01">
+            Create an account
+          </a> -->
+        </div>
+      </form>
+        <div class="register">
+          Already have an account?
+          <br>
+          <a [routerLink]="['/login']">Sign In</a>
+        </div>
+      </div>
+      <!-- End Form -->
+    </div>
+    <!-- End Right Content -->
+  </div>
+  <!-- End Row -->
 </div>
-  

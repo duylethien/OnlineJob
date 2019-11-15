@@ -2,16 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms'
 import { HttpModule } from '@angular/http';
-import { 
-  RouterModule,
-  Routes,
-  Router,
-  Event as RouterEvent,
-  NavigationStart,
-  NavigationEnd,
-  NavigationCancel,
-  NavigationError
-} from '@angular/router';
+import { RouterModule, Routes} from '@angular/router';
 
 import { FlashMessagesModule } from 'angular2-flash-messages';
 
@@ -24,14 +15,17 @@ import { ProfileComponent } from './components/profile/profile.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 
 import { ValidateService } from './services/validate.service';
-import {AuthService} from './services/auth.service';
+import { AuthService } from './services/auth.service';
+import { AuthGuard } from './guards/auth.guard';
+
+import { from } from 'rxjs';
 
 const appRoutes: Routes = [
   {path:'', component: HomeComponent},
   {path:'register', component: RegisterComponent},
   {path:'login', component: LoginComponent},
-  {path:'dashboard', component: DashboardComponent},
-  {path:'profile', component: ProfileComponent},
+  {path:'dashboard', component: DashboardComponent, canActivate:[AuthGuard]},
+  {path:'profile', component: ProfileComponent, canActivate:[AuthGuard]},
 ]
 
 @NgModule({
@@ -51,34 +45,8 @@ const appRoutes: Routes = [
     RouterModule.forRoot(appRoutes),
     FlashMessagesModule.forRoot(),
   ],
-  providers: [ValidateService, AuthService],
+  providers: [ValidateService, AuthService, AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule {
-
-  public showOverlay = true;
-
-  constructor (private router: Router) {
-    router.events.subscribe((event: RouterEvent) => {
-      this.navigationInterceptor(event)
-    })
-  }
-
-  // Shows and hides the loading spinner during RouterEvent changes
-  navigationInterceptor(event: RouterEvent): void {
-    if (event instanceof NavigationStart) {
-      this.showOverlay = true;
-    }
-    if (event instanceof NavigationEnd) {
-      this.showOverlay = false;
-    }
-
-    //Set loading state to false in both of the below enents to hide the spinner in case a request fails
-    if (event instanceof NavigationCancel) {
-      this.showOverlay = false;
-    }
-    if (event instanceof NavigationError) {
-      this.showOverlay = false;
-    }
-  }
  }
