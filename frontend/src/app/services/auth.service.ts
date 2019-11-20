@@ -30,6 +30,11 @@ export class AuthService {
     .pipe(map(res => res.json()));
   }
 
+  socialAuthenticate(){
+    return this.http.get('http://localhost:3000/api/user/auth/google')
+    .pipe(map(res => res.json));
+  }
+
   getProfile() {
     let headers = new Headers();
     this.loadToken();

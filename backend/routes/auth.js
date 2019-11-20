@@ -99,16 +99,33 @@ router.get('/profile', passport.authenticate('jwt', {session:false}), (req, res,
     res.json({user: req.user});
   });
 
-router.get('/auth/google',
-  passport.authenticate('google', { scope: 
-      [ 'https://www.googleapis.com/auth/plus.login',
-      , 'https://www.googleapis.com/auth/plus.profile.emails.read' ] }
-));
+router.get('/auth/google', passport.authenticate('google', { scope: 'profile' }));
 
 router.get( '/auth/google/callback', 
     passport.authenticate( 'google', { 
-        successRedirect: '/auth/google/success',
+        successRedirect: '/api/user/profile',
         failureRedirect: '/auth/google/failure'
 }));
+
+// router.get( '/auth/google/callback', 
+//     passport.authenticate('google'), (req, res) => {
+//         const token = jwt.sign({
+//             gg_id: req.gg_id,
+//             name: req.name,
+//             email: req.email
+//         }, process.env.TOKEN_SECRET, {
+//             expiresIn: '24h'
+//         });
+//         // res.header('auth-token', token).send(token);
+//         res.json({
+//             success: true,
+//             token: token,
+//             user: {
+//                 id: req.gg_id,
+//                 username: req.username
+//             }
+//         });
+//         res.send(req.user);
+//     });
 
 module.exports = router;

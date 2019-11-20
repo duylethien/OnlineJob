@@ -5,7 +5,10 @@ var Schema = mongoose.Schema;
 var UserSchema = new Schema({
     name: String,
     username: { type: String, required: true, index: {unique: true} },
-    password: { type: String, required: true, select: false },
+    // password: { type: String, required: true, select: false },
+    password: { type: String, select: false },
+    gg_id: { type: String },
+    email: { type: String },
     date: { type: Date, default: Date.now }
 });
 

@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 
 import { FlashMessagesService } from 'angular2-flash-messages';
+import { async } from 'q';
 
 @Component({
   selector: 'app-login',
@@ -42,6 +43,12 @@ export class LoginComponent implements OnInit {
           timeout: 5000});
         this.router.navigate(['login']);
       }
+    });
+  }
+
+  loginGoogle(){
+    this.authService.socialAuthenticate().subscribe(data => {
+      console.log(data);
     });
   }
 

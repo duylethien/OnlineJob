@@ -3,6 +3,9 @@ const cors = require('cors');
 const app = express();
 const dotenv = require('dotenv');
 const mongoose = require('mongoose');
+const passportGG = require('./config/passportGG');
+const passport = require('passport');
+const cookieSession = require('cookie-session');
 //Import Routes
 const authRoute = require('./routes/auth');
 const postRoute = require('./routes/posts');
@@ -22,6 +25,17 @@ app.use(function(req, res, next) {
     res.setHeader('Access-Control-Allow-Origin', '*');
     next();
 });
+
+app.use(
+    cookieSession({
+      maxAge: 30 * 24 * 60 * 60 * 1000,
+      keys: [process.env.TOKEN_SECRET]
+    })
+);
+
+//Initialize passport
+app.use(passport.initialize());
+app.use(passport.session());
 
 //Middleware
 app.use(express.json());
